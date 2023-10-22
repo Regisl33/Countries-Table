@@ -1,0 +1,47 @@
+@font-face {
+  font-family: "roboto" ;
+  src: url(./fonts/Roboto/Roboto-Regular.ttf);
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "roboto", sans-serif;
+  text-align: center;
+}
+h1{
+  margin: 100px auto 50px;
+  letter-spacing: 1px;
+  display: inline-block;
+  position: relative;
+}
+h1::after{
+  content: " ";
+  background: url(./img/globe.png) center/cover;
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  top: 50%;
+  right: -80px;
+  transform: translate(-50%, -50%);
+}
+.app{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5%;
+}
+table{
+  border: 2px solid black;
+  padding: 10px;
+  width: 100%;
+}
+th, td{
+  padding: 10px;
+  text-transform: capitalize;
+  width: 10%;
+}
+th{
+  border: 1px solid grey;
+}
