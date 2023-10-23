@@ -10,6 +10,9 @@
   font-family: "roboto", sans-serif;
   text-align: center;
 }
+body{
+  background: rgb(255, 255, 240);
+}
 h1{
   margin: 100px auto 50px;
   letter-spacing: 1px;
@@ -46,12 +49,18 @@ table{
   border: 2px solid black;
   padding: 10px;
   width: 100%;
+  background: whitesmoke;
 }
 th, td{
   padding: 10px;
   text-transform: capitalize;
-  width: 10%;
 }
 th{
   border: 1px solid grey;
+}
+.rows:hover{
+  transform: scale(102%);
+}
+.active{
+  color: rgb(4, 207, 4);
 }
