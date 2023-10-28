@@ -42,24 +42,6 @@ function displayCountries() {
     })
     .join("");
 }
-const sortMethod = {
-  numeric: function (column, order) {
-    if (order) {
-      data.sort((a, b) => a.column - b.column);
-    } else {
-      data.sort((a, b) => b.column - a.column);
-    }
-  },
-  alpha: function (column, order) {
-    let test = column;
-    if (order) {
-      data.sort((a, b) => a.test.localeCompare(b.test));
-    } else {
-      data.sort((a, b) => b.test.localeCompare(a.test));
-    }
-  },
-};
-
 //Application
 window.addEventListener("load", async () => {
   await fetchCountries();
@@ -74,26 +56,47 @@ window.addEventListener("load", async () => {
 });
 icons.forEach((icon) => {
   icon.addEventListener("click", (e) => {
-    if (e.target.classList === "active") {
-      if (e.target.id === "country") {
-        sortMethod.alpha(name.common, true);
-      } else if (e.target.id === "capital" || "continent") {
-        sortMethod.alpha(e.target.id, true);
-      } else if (e.target.id === "population") {
-        sortMethod.numeric(population, true);
-      }
-    } else {
-      icons.forEach((icon) => {
-        icon.classList.remove("active");
-      });
-      e.target.classList.add("active");
-      if (e.target.id === "country") {
-        sortMethod.alpha(name.common, false);
-      } else if (e.target.id === "capital" || "continent") {
-        sortMethod.alpha(e.target.id, false);
-      } else if (e.target.id === "population") {
-        sortMethod.numeric(population, false);
-      }
+    switch (e.target.id) {
+      case "country":
+        if (e.target.classList === "active") {
+          data.sort((a, b) => b.name.common.LocaleCompare(a.name.common));
+        } else {
+          icons.forEach((icon) => {
+            icon.classList.remove("active");
+          });
+          e.target.classList.add("active");
+          data.sort((a, b) => a.name.common.LocaleCompare(b.name.common));
+        }
+      case "capital":
+        if (e.target.classList === "active") {
+          data.sort((a, b) => b.capital.LocaleCompare(a.capital));
+        } else {
+          icons.forEach((icon) => {
+            icon.classList.remove("active");
+          });
+          e.target.classList.add("active");
+          data.sort((a, b) => a.capital.LocaleCompare(b.capital));
+        }
+      case "population":
+        if (e.target.classList === "active") {
+          data.sort((a, b) => b.population - a.population);
+        } else {
+          icons.forEach((icon) => {
+            icon.classList.remove("active");
+          });
+          e.target.classList.add("active");
+          data.sort((a, b) => a.population - b.population);
+        }
+      case "continent":
+        if (e.target.classList === "active") {
+          data.sort((a, b) => b.continent.LocaleCompare(a.continent));
+        } else {
+          icons.forEach((icon) => {
+            icon.classList.remove("active");
+          });
+          e.target.classList.add("active");
+          data.sort((a, b) => a.continent.LocaleCompare(b.continent));
+        }
     }
   });
 });
