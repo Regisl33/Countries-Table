@@ -10,11 +10,11 @@ async function fetchCountries() {
     .then((res) => res.json())
     .then((res) => (data = res));
   console.log(data);
+  data.sort((a, b) => b.population - a.population);
   displayCountries();
 }
 function displayCountries() {
   displayData.innerHTML = data
-    .sort((a, b) => b.population - a.population)
     .map((country) => {
       counter++;
       if (country.timezones.length === 1) {
@@ -59,43 +59,59 @@ icons.forEach((icon) => {
     switch (e.target.id) {
       case "country":
         if (e.target.classList === "active") {
-          data.sort((a, b) => b.name.common.LocaleCompare(a.name.common));
+          data.sort((a, b) => b.name.common.localeCompare(a.name.common));
+          counter = 0;
+          displayCountries();
         } else {
           icons.forEach((icon) => {
             icon.classList.remove("active");
           });
           e.target.classList.add("active");
-          data.sort((a, b) => a.name.common.LocaleCompare(b.name.common));
+          data.sort((a, b) => a.name.common.localeCompare(b.name.common));
+          counter = 0;
+          displayCountries();
         }
       case "capital":
         if (e.target.classList === "active") {
-          data.sort((a, b) => b.capital.LocaleCompare(a.capital));
+          data.sort((a, b) => b.capital[0].localeCompare(a.capital[0]));
+          counter = 0;
+          displayCountries();
         } else {
           icons.forEach((icon) => {
             icon.classList.remove("active");
           });
           e.target.classList.add("active");
-          data.sort((a, b) => a.capital.LocaleCompare(b.capital));
+          data.sort((a, b) => a.capital[0].localeCompare(b.capital[0]));
+          counter = 0;
+          displayCountries();
         }
       case "population":
         if (e.target.classList === "active") {
-          data.sort((a, b) => b.population - a.population);
+          data.sort((a, b) => a.population - b.population);
+          counter = 0;
+          displayCountries();
         } else {
           icons.forEach((icon) => {
             icon.classList.remove("active");
           });
           e.target.classList.add("active");
-          data.sort((a, b) => a.population - b.population);
+          data.sort((a, b) => b.population - a.population);
+          counter = 0;
+          displayCountries();
         }
       case "continent":
         if (e.target.classList === "active") {
-          data.sort((a, b) => b.continent.LocaleCompare(a.continent));
+          data.sort((a, b) => b.continents[0].localeCompare(a.continents[0]));
+          counter = 0;
+          displayCountries();
         } else {
           icons.forEach((icon) => {
             icon.classList.remove("active");
           });
           e.target.classList.add("active");
-          data.sort((a, b) => a.continent.LocaleCompare(b.continent));
+          data.sort((a, b) => a.continents[0].localeCompare(b.continents[0]));
+          counter = 0;
+          displayCountries();
         }
     }
   });
